@@ -1,0 +1,63 @@
+
+#!/bin/sh -l
+
+#SBATCH --nodes=1                   ##number of requested nodes (a node is a group of CPUs)
+#SBATCH -n 20                    ##number of requested CPUs
+#SBATCH --time=24:00:00             ##time requested
+#SBATCH --job-name qiime_classifier ##name of job
+#SBATCH -A highmem                 ##name of the queue you are using. Could be scholar or microbiome if you are on snyder
+
+#########################################################################
+
+echo "Start time"
+date +"%d %B %Y %H:%M:%S"
+
+#step 1, cd into the proper directory. This directory must already exist
+
+cd /depot/microbiome/data/ANSC516/Vanessa_Ng/
+
+pwd
+
+#step 2, check environment
+
+conda info
+
+#step 3, Run the code you want
+
+#Retrieve the database
+
+echo "download the database files"
+
+wget https://data.qiime2.org/2024.10/common/silva-138-99-seqs.qza
+wget https://data.qiime2.org/2024.10/common/silva-138-99-tax.qza
+
+echo "finished downloading the database files"
+
+echo "trim the ref seqs"
+date +"%d %B %Y %H:%M:%S"
+
+##YOU need to enter YOUR primers in this command. For learnings sake
+##use this example below. For your own project, use the primers used
+##in your project.
+qiime feature-classifier extract-reads \
+--i-sequences silva-138-99-seqs.qza \
+--p-f-primer CCTACGGGNGGCWGCAG  \
+--p-r-primer GACTACHVGGGTATCTAATCC  \
+--p-min-length 30  \
+--p-max-length 600 \
+--p-n-jobs 16 \
+--o-reads ref-seqs-v3v4.qza
+
+date +"%d %B %Y %H:%M:%S"
+echo "Train the classifier"
+
+qiime feature-classifier fit-classifier-naive-bayes \
+--i-reference-reads ref-seqs-v3v4.qza \
+--i-reference-taxonomy silva-138-99-tax.qza \
+--o-classifier silva-classifier-v3v4.qza
+
+
+#to run:
+#module load conda
+#conda activate qiime2-amplicon-2024.10
+#sbatch silva_classifier.slurm
