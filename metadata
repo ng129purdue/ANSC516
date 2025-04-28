@@ -1,0 +1,25 @@
+sample-id       Code    cratenumber     parity
+#q2:types       categorical     categorical     categorical
+1       Sow.Cr3.NC      3       6
+2       Sow.Cr6.NC      6       5
+3       Sow.Cr8.A       8       2
+4       Sow.Cr9.NC      9       4
+5       Sow.Cr11.NC     11      4
+6       Sow.Cr12.NC     12      2
+7       Sow.Cr17.NC     17      2
+8       Sow.Cr23.A      23      4
+9       Sow.Cr26.A      26      6
+10      Sow.Cr30.NC     30      2
+11      Sow.Cr31.NC     31      5
+12      Sow.Cr32.A      32      2
+13      Sow.Cr35.A      35      2
+14      Sow.Cr41.A      41      1
+15      Sow.Cr45.A      45      5
+16      Sow.Cr46.A      46      1
+17      Sow.Cr48.NC     48      1
+18      Sow.Cr56.NC     56      1
+19      Sow.Cr58.A      58      1
+20      Sow.Cr62.NC     62      1
+21      Sow.Cr63.NC     63      1
+
+
